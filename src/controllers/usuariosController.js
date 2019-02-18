@@ -74,7 +74,7 @@ class UsuariosController {
         const { id } = req.params;
         const query = "DELETE FROM cuenta WHERE id_cuenta = " + [id];
         await client.query(query);
-        res.json({ text: 'Usuario eliminado' });
+        res.status(200).json({ text: 'Usuario eliminado' });
 
     }
 
