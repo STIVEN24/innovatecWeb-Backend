@@ -2,14 +2,17 @@ class IndexController {
 
     index(req, res) {
         res.json(
-            { text: 'Index' },
-            { "API's": [
-                "/api/tiposDocumento",
-                "/api/usuarios",
-                "/api/roles",
-                "/api/chart",
-                ]
-            }
+            [
+                { text: 'Index' },
+                {
+                    APIs: [
+                        "/api/tiposDocumento",
+                        "/api/usuarios",
+                        "/api/roles",
+                        "/api/chart",
+                    ]
+                }
+            ]
         );
     }
 
