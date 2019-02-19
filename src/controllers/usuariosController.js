@@ -88,7 +88,7 @@ class UsuariosController {
 
         if (correo && documento) {
 
-            const queryCorreoDocumento = `SELECT * FROM cuenta WHERE documento = '${documento}' and correo = '${correo.toLowerCase()}' `; // --- Query documento and correo --- //
+            const queryCorreoDocumento = `SELECT * FROM cuenta INNER JOIN rol using(id_rol) WHERE documento = '${documento}' and correo = '${correo.toLowerCase()}' `; // --- Query documento and correo --- //
 
             const resultCorreoDocumento = await client.query(queryCorreoDocumento); // --- Result documento and correo --- //
 
