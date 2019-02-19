@@ -1,5 +1,8 @@
 const client = require('../db/database');
 
+const jwt = require('jsonwebtoken');
+const JWT_Secret = 'eyIyNCI6ImRpYSIsIjE5OTkiOiJhw7FvIiwiMDYiOiJtZXMiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5OTU1ODgxMjMiLCJuYW1lIjoib3J0c2FjIiwiaWF0Ijo5NzY0MzF9.0TZoXWuWZzulNGPY2OJHohDgZH8gVEmVFnglPIRiT5E';
+
 class UsuariosController {
 
     async getOne(req, res) {
@@ -89,10 +92,10 @@ class UsuariosController {
 
             const resultCorreoDocumento = await client.query(queryCorreoDocumento); // --- Result documento and correo --- //
 
-            const ObjectsExist = []; // --- List for objects exists --- //
-
-            if (resultCorreoDocumento.rows.length > 0) { ObjectsExist.push({ text: 'Usuario encontrado' }); } // --- Pushing to list of objects exists --- //
-            if (ObjectsExist.length > 0) { return res.status(200).json(ObjectsExist); } // --- If list have max of 0 --- //
+            if (resultCorreoDocumento.rows.length > 0) {
+                const token = jwt.sign( req.body , JWT_Secret );
+                return res.status(200).json({ token: token });
+            } // --- If list have max of 0 --- //
             else { // --- Not found --- //
                 res.status(403).json({ text: 'Usuario no encontrado: Correo o contraseña incorrecto' });
             }
