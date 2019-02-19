@@ -94,7 +94,7 @@ class UsuariosController {
 
             if (resultCorreoDocumento.rows.length > 0) {
                 const token = jwt.sign( req.body , JWT_Secret );
-                return res.status(200).json(token);
+                return res.status(200).json({ token : token });
             } // --- If list have max of 0 --- //
             else { // --- Not found --- //
                 res.status(403).json({ text: 'Usuario no encontrado: Correo o contraseña incorrecto' });
